@@ -1,0 +1,64 @@
+/* Estilos para el Dashboard */
+
+.dashboard-container {
+  padding: 2rem;
+  font-family: sans-serif;
+}
+
+.logout-button {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}
+
+.connected-accounts {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ccc;
+}
+
+.connect-button {
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.connect-button.x-button {
+  background-color: #1da1f2; /* Color de Twitter/X */
+  color: white;
+  border-color: #1da1f2;
+}
+
+.connect-button.x-button:hover {
+  background-color: #0c85d0;
+}
+
+.instagram-button {
+  background-color: #e1306c;
+  color: white;
+  border-color: #e1306c;
+}
+
+.instagram-button:hover {
+  background-color: #b92d5d;
+}
+
+.connected-accounts ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.connected-accounts li {
+  margin-bottom: 0.5rem;
+} 

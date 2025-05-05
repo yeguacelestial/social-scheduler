@@ -45,8 +45,56 @@ async function getInstagramProfile(access_token, user_id) {
   return await res.json(); // { id, username, account_type }
 }
 
+// 4. Crear contenedor de imagen en Instagram
+async function createInstagramMediaContainer(access_token, instagram_business_account_id, image_url, caption) {
+  const url = `https://graph.facebook.com/v19.0/${instagram_business_account_id}/media`;
+  const params = new URLSearchParams({
+    image_url,
+    caption: caption || '',
+    access_token,
+  });
+  const res = await fetch(url, { method: 'POST', body: params });
+  const data = await res.json();
+  if (!res.ok) {
+    console.error('Error creando contenedor de imagen:', data);
+    throw new Error(data.error?.message || 'Error creando contenedor de imagen');
+  }
+  return data; // { id }
+}
+
+// 5. Publicar el contenedor en Instagram
+async function publishInstagramMediaContainer(access_token, instagram_business_account_id, creation_id) {
+  const url = `https://graph.facebook.com/v19.0/${instagram_business_account_id}/media_publish`;
+  const params = new URLSearchParams({
+    creation_id,
+    access_token,
+  });
+  const res = await fetch(url, { method: 'POST', body: params });
+  const data = await res.json();
+  if (!res.ok) {
+    console.error('Error publicando contenedor:', data);
+    throw new Error(data.error?.message || 'Error publicando contenedor');
+  }
+  return data; // { id }
+}
+
+// 6. Obtener estado de publicación
+async function getInstagramMediaStatus(access_token, media_id) {
+  const url = `https://graph.facebook.com/v19.0/${media_id}?fields=status_code&access_token=${access_token}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  if (!res.ok) {
+    console.error('Error obteniendo estado de publicación:', data);
+    throw new Error(data.error?.message || 'Error obteniendo estado de publicación');
+  }
+  return data; // { status_code }
+}
+
 module.exports = {
   getInstagramAuthUrl,
   exchangeCodeForToken,
-  getInstagramProfile
+  getInstagramProfile,
+  createInstagramMediaContainer,
+  publishInstagramMediaContainer,
+  getInstagramMediaStatus
 }; 
